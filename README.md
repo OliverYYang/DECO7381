@@ -1,2 +1,1 @@
-# DECO7381
-Swift development
+The team project for swift development
