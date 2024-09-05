@@ -117,10 +117,13 @@ struct ContentView: View {
                             .font(.footnote)
                     }
                     Spacer()
+                    // 修改过---------------------------
                     VStack {
-                        Image("Scan")
-                            .resizable()
-                            .frame(width: 80, height: 80)
+                        NavigationLink(destination: ScannerView()) {
+                            Image("Scan")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                        }
                         Text("Scan")
                             .font(.footnote)
                     }
