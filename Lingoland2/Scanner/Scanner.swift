@@ -41,13 +41,16 @@ class Scanner: NSObject {
             var recognizedText = ""
             
             for observation in observations {
-                guard let topCandidate = observation.topCandidates(1).first else { continue }
-                recognizedText += topCandidate.string + "\n"
+                if let topCandidate = observation.topCandidates(1).first {
+                    recognizedText += topCandidate.string + "\n"
+                }
             }
             
-            completion(recognizedText)
+            completion(recognizedText.isEmpty ? nil : recognizedText)
         }
         
+        textRecognitionRequest.recognitionLanguages = ["zh-CN", "en-US"] // 添加中文和英文的支持
+
         do {
             try requestHandler.perform([textRecognitionRequest])
         } catch {
