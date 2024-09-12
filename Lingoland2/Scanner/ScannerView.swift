@@ -9,13 +9,22 @@ import SwiftUI
 import UIKit
 
 struct ScannerView: UIViewControllerRepresentable {
+    // 用来接收 OCR 结果的闭包
+    var ocrResultHandler: ((String?) -> Void)?
 
     func makeUIViewController(context: Context) -> CameraViewController {
-        return CameraViewController()
+        let cameraViewController = CameraViewController()
+        
+        // 将 OCR 结果处理程序传递给 CameraViewController
+        cameraViewController.ocrResult = { text in
+            // 打印 OCR 结果到控制台
+            print("OCR identifies result: \(text ?? "Text not recognized")")
+        }
+        return cameraViewController
     }
 
     func updateUIViewController(_ uiViewController: CameraViewController, context: Context) {
-        // 这里可以实现实时更新，但目前没有需要更新的内容
+        // 不需要做任何更新
     }
 }
 

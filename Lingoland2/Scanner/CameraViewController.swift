@@ -6,14 +6,15 @@
 //
 
 import UIKit
-
-import UIKit
 import AVFoundation
+import Vision
 
 class CameraViewController: UIViewController {
 
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    var scanner = Scanner() // 初始化 Scanner 类
+    var ocrResult: ((String?) -> Void)? // 用于传递 OCR 结果的闭包
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,13 @@ class CameraViewController: UIViewController {
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // 这里可以处理捕获的帧，并进行OCR等处理
+        // 这里调用 Scanner 类来处理帧并进行 OCR 识别
+        scanner.handleCapturedFrame(sampleBuffer) { [weak self] recognizedText in
+            DispatchQueue.main.async {
+                // 将 OCR 结果传递给 ScannerView
+                self?.ocrResult?(recognizedText)
+            }
+        }
     }
 }
+

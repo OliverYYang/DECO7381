@@ -13,7 +13,7 @@ struct GameView: View {
                             .padding()
                             .offset(x:5, y:10)
 
-                    }-
+                    }
                     Spacer()
                 }
                 .background(Color.gray.opacity(0.2))

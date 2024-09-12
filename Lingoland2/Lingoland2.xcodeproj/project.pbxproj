@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		741C08402C93ABC8005DEBAD /* ScannerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741C083F2C93ABC8005DEBAD /* ScannerContentView.swift */; };
 		742C44AC2C85581500F7138C /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AB2C85581500F7138C /* Scanner.swift */; };
 		742C44AE2C855A1E00F7138C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AD2C855A1E00F7138C /* ScannerView.swift */; };
 		742C44B02C855AB800F7138C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AF2C855AB800F7138C /* CameraViewController.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		741C083F2C93ABC8005DEBAD /* ScannerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerContentView.swift; sourceTree = "<group>"; };
 		742C44AB2C85581500F7138C /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		742C44AD2C855A1E00F7138C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		742C44AF2C855AB800F7138C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				742C44AB2C85581500F7138C /* Scanner.swift */,
 				742C44AF2C855AB800F7138C /* CameraViewController.swift */,
 				742C44AD2C855A1E00F7138C /* ScannerView.swift */,
+				741C083F2C93ABC8005DEBAD /* ScannerContentView.swift */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741C08402C93ABC8005DEBAD /* ScannerContentView.swift in Sources */,
 				D89085EE2C7F05C40012F242 /* ContentView.swift in Sources */,
 				D89085EC2C7F05C40012F242 /* Lingoland2App.swift in Sources */,
 				D85CEF392C833758008F4158 /* UserView.swift in Sources */,
