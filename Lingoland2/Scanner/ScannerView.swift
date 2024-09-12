@@ -19,6 +19,9 @@ struct ScannerView: UIViewControllerRepresentable {
         cameraViewController.ocrResult = { text in
             // 打印 OCR 结果到控制台
             print("OCR identifies result: \(text ?? "Text not recognized")")
+
+            // 调用闭包（如果存在），传递 OCR 结果
+            ocrResultHandler?(text)
         }
         return cameraViewController
     }

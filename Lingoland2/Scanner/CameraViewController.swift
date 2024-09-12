@@ -4,7 +4,6 @@
 //
 //  Created by Error404 on 2/9/2024.
 //
-
 import UIKit
 import AVFoundation
 import Vision
@@ -61,15 +60,19 @@ class CameraViewController: UIViewController {
     }
 }
 
+// 扩展 AVCaptureVideoDataOutputSampleBufferDelegate 以处理帧
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // 这里调用 Scanner 类来处理帧并进行 OCR 识别
+        // 使用 Scanner 类处理帧并进行 OCR 识别
         scanner.handleCapturedFrame(sampleBuffer) { [weak self] recognizedText in
             DispatchQueue.main.async {
-                // 将 OCR 结果传递给 ScannerView
-                self?.ocrResult?(recognizedText)
+                // 检查识别到的文本，如果为空则返回默认文本
+                if let text = recognizedText, !text.isEmpty {
+                    self?.ocrResult?(text)
+                } else {
+                    self?.ocrResult?("Text not recognized")
+                }
             }
         }
     }
 }
-
