@@ -4,6 +4,8 @@
 //
 //  Created by Error404 on 2/9/2024.
 //
+
+
 import UIKit
 import AVFoundation
 import Vision
@@ -14,6 +16,7 @@ class CameraViewController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var scanner = Scanner() // 初始化 Scanner 类
     var ocrResult: ((String?) -> Void)? // 用于传递 OCR 结果的闭包
+    var isProcessing = false // 标记是否正在进行 OCR 识别
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,14 +66,24 @@ class CameraViewController: UIViewController {
 // 扩展 AVCaptureVideoDataOutputSampleBufferDelegate 以处理帧
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        // 如果当前正在处理 OCR，则跳过这一帧
+        guard !isProcessing else { return }
+        
+        isProcessing = true // 标记为正在处理
+        
         // 使用 Scanner 类处理帧并进行 OCR 识别
         scanner.handleCapturedFrame(sampleBuffer) { [weak self] recognizedText in
             DispatchQueue.main.async {
-                // 检查识别到的文本，如果为空则返回默认文本
-                if let text = recognizedText, !text.isEmpty {
-                    self?.ocrResult?(text)
-                } else {
-                    self?.ocrResult?("Text not recognized")
+                // 将 OCR 结果传递给 ScannerView
+                self?.ocrResult?(recognizedText ?? "Text not recognized")
+                
+                // 打印 OCR 识别结果
+                print("OCR identifies result: \(recognizedText ?? "Text not recognized")")
+                
+                // 延迟 3 秒后再允许处理下一帧
+                DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {
+                    self?.isProcessing = false
                 }
             }
         }
