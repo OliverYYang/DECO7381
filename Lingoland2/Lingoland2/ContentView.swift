@@ -2,14 +2,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var searchText: String = "" // 声明 searchText
+
     var body: some View {
         NavigationView {
             VStack {
                 // Search Bar
                 HStack {
-                    TextField("Search...", text: .constant(""))
+                    TextField("Search...", text: $searchText)
                         .padding(.leading, 10)
-                    NavigationLink(destination:VocabularyView()){
+                    NavigationLink(destination: VocabularyView(wordToTranslate: searchText)) {
                         Image(systemName: "magnifyingglass")
                             .padding(.trailing, 10)
                     }
@@ -32,8 +34,10 @@ struct ContentView: View {
                             Text("Today's Mission: 8 / 10 words")
                                 .font(.subheadline)
                         }
+                        .foregroundColor(.white)
                         Spacer()
                         Text("Cost: 90")
+                            .foregroundColor(.orange)
                             .font(.subheadline)
                             .padding(.trailing)
                     }
@@ -77,7 +81,7 @@ struct ContentView: View {
                     }
                 }
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .background(Color.black.opacity(0.8))
                 .cornerRadius(10)
                 .padding()
 
@@ -89,8 +93,10 @@ struct ContentView: View {
                             .frame(width: 85, height: 65)
                         Spacer()
                         Text("Manage my Vocabulary")
+                            .foregroundColor(.white)
                             .font(.footnote)
                     }
+                    .background(Color.black.opacity(0.7))
                     .frame(maxWidth: .infinity)
 
                     VStack {
@@ -98,8 +104,10 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 100, height: 73)
                         Text("Manage my Monster")
+                            .foregroundColor(.white)
                             .font(.footnote)
                     }
+                    .background(Color.black.opacity(0.7))
                     .frame(maxWidth: .infinity)
                 }
                 .padding()
@@ -113,8 +121,10 @@ struct ContentView: View {
                         Image(systemName: "person.circle")
                             .resizable()
                             .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
                         Text("User")
                             .font(.footnote)
+                            .foregroundColor(.white)
                     }
                     Spacer()
                     // 修改过---------------------------
@@ -123,25 +133,30 @@ struct ContentView: View {
                             Image("Scan")
                                 .resizable()
                                 .frame(width: 80, height: 80)
+                                .foregroundColor(.white)
                         }
                         Text("Scan")
                             .font(.footnote)
+                            .foregroundColor(.white)
                     }
                     Spacer()
                     VStack {
                         Image(systemName: "gear")
                             .resizable()
                             .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
                         Text("Setting")
                             .font(.footnote)
+                            .foregroundColor(.white)
                     }
                     Spacer()
                 }
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .background(Color.black.opacity(0.8))
             }
             .navigationTitle("HomePage")
             .navigationBarTitleDisplayMode(.inline)
+            
             
         }
     }
