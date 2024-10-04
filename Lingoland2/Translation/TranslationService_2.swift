@@ -45,12 +45,16 @@ class TranslationService {
     private let baseURL = "https://translation.googleapis.com/language/translate/v2"
     private let detectURL = "https://translation.googleapis.com/language/translate/v2/detect"
     
+    
     // 使用 Free Dictionary API 查询同义词和例句
     private let freeDictionaryBaseURL = "https://api.dictionaryapi.dev/api/v2/entries"
 
     
     // 翻译方法
     func translate(text: String, targetLanguage: String, completion: @escaping (String?) -> Void) {
+        print("准备进行翻译：原始文本为 \(text)，目标语言为 \(targetLanguage)")
+        
+        
         guard let url = URL(string: "\(baseURL)?key=\(apiKey)") else {
             print("Invalid URL.")
             completion(nil)
