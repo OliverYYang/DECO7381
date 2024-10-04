@@ -79,7 +79,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 self?.ocrResult?(recognizedText ?? "Text not recognized")
                 
                 // 打印 OCR 识别结果
-                print("OCR identifies result: \(recognizedText ?? "Text not recognized")")
+//                print("OCR identifies result: \(recognizedText ?? "Text not recognized")")
                 
                 // 延迟 3 秒后再允许处理下一帧
                 DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {

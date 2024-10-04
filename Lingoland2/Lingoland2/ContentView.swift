@@ -119,11 +119,13 @@ struct ContentView: View {
                     Spacer()
                     // 修改过---------------------------
                     VStack {
-                        NavigationLink(destination: ScannerView()) {
+                        NavigationLink(destination: ScannerContentView()) {  // 修改为 ScannerContentView
                             Image("Scan")
                                 .resizable()
                                 .frame(width: 80, height: 80)
                         }
+                    
+
                         Text("Scan")
                             .font(.footnote)
                     }
