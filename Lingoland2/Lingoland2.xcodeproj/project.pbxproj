@@ -11,13 +11,12 @@
 		742C44AC2C85581500F7138C /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AB2C85581500F7138C /* Scanner.swift */; };
 		742C44AE2C855A1E00F7138C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AD2C855A1E00F7138C /* ScannerView.swift */; };
 		742C44B02C855AB800F7138C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C44AF2C855AB800F7138C /* CameraViewController.swift */; };
-<<<<<<< Updated upstream
-=======
-		D8141CA12CAD1C1400B21384 /* TranslationService_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8141CA02CAD1C1400B21384 /* TranslationService_2.swift */; };
->>>>>>> Stashed changes
+		D812DF432CAEE95300E6A5F8 /* Lingoland2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812DF422CAEE94100E6A5F8 /* Lingoland2App.swift */; };
+		D812DF452CAF667800E6A5F8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812DF442CAF666700E6A5F8 /* Settings.swift */; };
+		D8141CA12CAD1C1400B21384 /* TranslationService 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8141CA02CAD1C1400B21384 /* TranslationService 2.swift */; };
+		D8141CA52CAEB6BB00B21384 /* GameView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8141CA42CAEB6B300B21384 /* GameView3.swift */; };
 		D85CEF372C8335A4008F4158 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85CEF362C8335A4008F4158 /* GameView.swift */; };
 		D85CEF392C833758008F4158 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85CEF382C833758008F4158 /* UserView.swift */; };
-		D89085EC2C7F05C40012F242 /* Lingoland2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89085EB2C7F05C40012F242 /* Lingoland2App.swift */; };
 		D89085EE2C7F05C40012F242 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89085ED2C7F05C40012F242 /* ContentView.swift */; };
 		D89085F02C7F05C70012F242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89085EF2C7F05C70012F242 /* Assets.xcassets */; };
 		D89085F32C7F05C70012F242 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89085F22C7F05C70012F242 /* Preview Assets.xcassets */; };
@@ -25,6 +24,7 @@
 		D89086072C7F05C70012F242 /* Lingoland2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89086062C7F05C70012F242 /* Lingoland2UITests.swift */; };
 		D89086092C7F05C70012F242 /* Lingoland2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89086082C7F05C70012F242 /* Lingoland2UITestsLaunchTests.swift */; };
 		D89086162C7F0C270012F242 /* VocabularyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89086152C7F0C270012F242 /* VocabularyView.swift */; };
+		D8D4D3972C95541500AD0237 /* GameView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D4D3962C95541500AD0237 /* GameView1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,14 +49,13 @@
 		742C44AB2C85581500F7138C /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		742C44AD2C855A1E00F7138C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		742C44AF2C855AB800F7138C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
-=======
-		D8141CA02CAD1C1400B21384 /* TranslationService_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService_2.swift; sourceTree = "<group>"; };
->>>>>>> Stashed changes
+		D812DF422CAEE94100E6A5F8 /* Lingoland2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lingoland2App.swift; sourceTree = "<group>"; };
+		D812DF442CAF666700E6A5F8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D8141CA02CAD1C1400B21384 /* TranslationService 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslationService 2.swift"; sourceTree = "<group>"; };
+		D8141CA42CAEB6B300B21384 /* GameView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView3.swift; sourceTree = "<group>"; };
 		D85CEF362C8335A4008F4158 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D85CEF382C833758008F4158 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		D89085E82C7F05C40012F242 /* Lingoland2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lingoland2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D89085EB2C7F05C40012F242 /* Lingoland2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lingoland2App.swift; sourceTree = "<group>"; };
 		D89085ED2C7F05C40012F242 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D89085EF2C7F05C70012F242 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89085F22C7F05C70012F242 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		D89086062C7F05C70012F242 /* Lingoland2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lingoland2UITests.swift; sourceTree = "<group>"; };
 		D89086082C7F05C70012F242 /* Lingoland2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lingoland2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D89086152C7F0C270012F242 /* VocabularyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyView.swift; sourceTree = "<group>"; };
+		D8D4D3962C95541500AD0237 /* GameView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,21 +104,19 @@
 			path = Scanner;
 			sourceTree = "<group>";
 		};
-<<<<<<< Updated upstream
-=======
 		D8141C9D2CAD146F00B21384 /* Translation */ = {
 			isa = PBXGroup;
 			children = (
-				D8141CA02CAD1C1400B21384 /* TranslationService_2.swift */,
+				D8141CA02CAD1C1400B21384 /* TranslationService 2.swift */,
 				D89086152C7F0C270012F242 /* VocabularyView.swift */,
 			);
 			path = Translation;
 			sourceTree = "<group>";
 		};
->>>>>>> Stashed changes
 		D89085DF2C7F05C40012F242 = {
 			isa = PBXGroup;
 			children = (
+				D8141C9D2CAD146F00B21384 /* Translation */,
 				742C44B12C855B2600F7138C /* Scanner */,
 				D89085EA2C7F05C40012F242 /* Lingoland2 */,
 				D89085FB2C7F05C70012F242 /* Lingoland2Tests */,
@@ -140,9 +138,12 @@
 		D89085EA2C7F05C40012F242 /* Lingoland2 */ = {
 			isa = PBXGroup;
 			children = (
+				D812DF442CAF666700E6A5F8 /* Settings.swift */,
+				D812DF422CAEE94100E6A5F8 /* Lingoland2App.swift */,
+				D8141CA42CAEB6B300B21384 /* GameView3.swift */,
+				D85CEF382C833758008F4158 /* UserView.swift */,
+				D8D4D3962C95541500AD0237 /* GameView1.swift */,
 				D85CEF362C8335A4008F4158 /* GameView.swift */,
-				D89086152C7F0C270012F242 /* VocabularyView.swift */,
-				D89085EB2C7F05C40012F242 /* Lingoland2App.swift */,
 				D89085ED2C7F05C40012F242 /* ContentView.swift */,
 				D89085EF2C7F05C70012F242 /* Assets.xcassets */,
 				D89085F12C7F05C70012F242 /* Preview Content */,
@@ -153,7 +154,6 @@
 		D89085F12C7F05C70012F242 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				D85CEF382C833758008F4158 /* UserView.swift */,
 				D89085F22C7F05C70012F242 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -240,7 +240,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					D89085E72C7F05C40012F242 = {
 						CreatedOnToolsVersion = 15.4;
@@ -306,18 +306,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D4D3972C95541500AD0237 /* GameView1.swift in Sources */,
 				741C08402C93ABC8005DEBAD /* ScannerContentView.swift in Sources */,
+				D812DF452CAF667800E6A5F8 /* Settings.swift in Sources */,
 				D89085EE2C7F05C40012F242 /* ContentView.swift in Sources */,
-				D89085EC2C7F05C40012F242 /* Lingoland2App.swift in Sources */,
-<<<<<<< Updated upstream
-=======
-				D8141CA12CAD1C1400B21384 /* TranslationService_2.swift in Sources */,
->>>>>>> Stashed changes
+				D8141CA12CAD1C1400B21384 /* TranslationService 2.swift in Sources */,
 				D85CEF392C833758008F4158 /* UserView.swift in Sources */,
 				D85CEF372C8335A4008F4158 /* GameView.swift in Sources */,
 				742C44AC2C85581500F7138C /* Scanner.swift in Sources */,
 				742C44B02C855AB800F7138C /* CameraViewController.swift in Sources */,
 				742C44AE2C855A1E00F7138C /* ScannerView.swift in Sources */,
+				D812DF432CAEE95300E6A5F8 /* Lingoland2App.swift in Sources */,
+				D8141CA52CAEB6BB00B21384 /* GameView3.swift in Sources */,
 				D89086162C7F0C270012F242 /* VocabularyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,7 +539,6 @@
 		D89086102C7F05C70012F242 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -558,7 +557,6 @@
 		D89086112C7F05C70012F242 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -577,7 +575,6 @@
 		D89086132C7F05C70012F242 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -594,7 +591,6 @@
 		D89086142C7F05C70012F242 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
