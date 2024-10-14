@@ -6,8 +6,7 @@
 //
 
 import Translation // 假设 `TranslationService 2` 是文件名
-import SwiftUI
-
+import MySQLNIO
 import SwiftUI
 
 struct ScannerContentView: View {
@@ -43,23 +42,37 @@ struct ScannerContentView: View {
                             if let detectedLanguage = detectedLanguage {
                                 print("检测到的语言: \(detectedLanguage)")
                                 
-                                // 根据检测的语言决定翻译的目标语言
-                                var targetLanguage: String
+                                // 如果检测到是英文，将其翻译为中文后插入 `review` 表
                                 if detectedLanguage == "en" {
-                                    targetLanguage = "zh-CN" // 如果是英文，翻译成中文
+                                    print("检测到英文单词，准备加入到词库: \(ocrText)")
+                                    
+                                    // 翻译成中文
+                                    translationService.translate(text: ocrText, targetLanguage: "zh-CN") { translated in
+                                        DispatchQueue.main.async {
+                                            self.translatedText = translated ?? "翻译失败"
+                                            print("翻译结果: \(translatedText)")
+                                            
+                                            // 调用保存方法，将英文和翻译后的中文插入 `review` 表
+                                            saveOCRResult(ocrText: ocrText, translatedText: translatedText)
+                                        }
+                                    }
+
+                                // 如果检测到是中文，则翻译成英文
                                 } else if detectedLanguage == "zh-CN" {
-                                    targetLanguage = "en" // 如果是中文，翻译成英文
+                                    // 翻译成英文
+                                    translationService.translate(text: ocrText, targetLanguage: "en") { translated in
+                                        DispatchQueue.main.async {
+                                            self.translatedText = translated ?? "翻译失败"
+                                            print("翻译结果: \(translatedText)")
+                                            
+                                            // 调用保存方法，将中文和翻译后的英文插入 `review` 表
+                                            saveOCRResult(ocrText: ocrText, translatedText: translatedText)
+                                        }
+                                    }
                                 } else {
-                                    targetLanguage = "en" // 默认翻译成英文
+                                    print("不支持的语言: \(detectedLanguage)")
                                 }
 
-                                // 调用翻译 API
-                                translationService.translate(text: ocrText, targetLanguage: targetLanguage) { translated in
-                                    DispatchQueue.main.async {
-                                        self.translatedText = translated ?? "翻译失败"
-                                        print("翻译结果: \(translatedText)")
-                                    }
-                                }
                             } else {
                                 print("无法检测到语言")
                                 self.translatedText = "无法检测到语言"
@@ -76,7 +89,46 @@ struct ScannerContentView: View {
             Spacer()
         }
     }
+
+    // 保存 OCR 扫描到的文本和翻译结果到 `review` 表中
+    func saveOCRResult(ocrText: String, translatedText: String) {
+        // 过滤掉无法识别的内容
+        guard ocrText != "Text not recognized", !ocrText.isEmpty else {
+            print("无效的 OCR 文本，不进行数据库插入")
+            return
+        }
+
+        let database = connectToDatabase()
+
+        database.whenSuccess { connection in
+            let query = "INSERT INTO review (text, translation) VALUES (?, ?)"
+            
+            // 将字符串转换为 MySQLData
+            let parameters: [MySQLData] = [
+                .init(string: ocrText),    // OCR 扫描到的文本
+                .init(string: translatedText) // 翻译结果
+            ]
+            
+            connection.query(query, parameters).whenComplete { result in
+                switch result {
+                case .success:
+                    print("成功将以下内容插入 review 表：")
+                    print("OCR 文本: \(ocrText), 翻译文本: \(translatedText)")
+                case .failure(let error):
+                    print("插入 OCR 文本失败: \(error.localizedDescription)")
+                }
+                connection.close().whenComplete { _ in
+                    // 数据库连接关闭
+                }
+            }
+        }
+
+        database.whenFailure { error in
+            print("数据库连接失败: \(error.localizedDescription)")
+        }
+    }
 }
+
 
 struct ScannerContentView_Previews: PreviewProvider {
     static var previews: some View {
