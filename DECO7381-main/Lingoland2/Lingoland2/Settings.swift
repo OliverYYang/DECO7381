@@ -97,15 +97,18 @@ struct SettingView: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: ScannerView()) {
-                        Image("Scan")
-                            .resizable()
-                            .frame(width: 80, height: 80)
+                    NavigationLink(destination: ScannerView(isFullScreenMode: true) { text in
+                            // 处理 OCR 结果的逻辑，可以在这里打印或处理识别到的文本
+                            print("OCR 结果: \(text ?? "未识别到文本")")
+                        }) {
+                            Image("Scan")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(.white)
+                        }
+                        Text("Scan")
+                            .font(.footnote)
                             .foregroundColor(.white)
-                    }
-                    Text("Scan")
-                        .font(.footnote)
-                        .foregroundColor(.white)
                 }
                 Spacer()
                 

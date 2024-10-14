@@ -171,15 +171,16 @@ struct UserView: View {
                     Spacer()
 
                     VStack {
-                        NavigationLink(destination: ScannerView()) {
+                        // 添加 NavigationLink，点击后进入 ScannerView
+                        NavigationLink(destination: ScannerView(isFullScreenMode: true) { text in
+                            // 处理从 ScannerView 返回的 OCR 结果
+                            print("OCR 结果: \(text ?? "未识别到文本")")
+                        }) {
                             Image("Scan")
                                 .resizable()
                                 .frame(width: 80, height: 80)
                                 .foregroundColor(.white)
                         }
-                        Text("Scan")
-                            .font(.footnote)
-                            .foregroundColor(.white)
                     }
                     Spacer()
                     VStack {

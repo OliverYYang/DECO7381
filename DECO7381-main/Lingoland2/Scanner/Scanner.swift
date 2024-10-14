@@ -14,16 +14,16 @@ class Scanner: NSObject {
     private var textRecognitionRequest: VNRecognizeTextRequest
     
     override init() {
-        // 初始化 OCR 请求
+        // Initialize OCR request
         textRecognitionRequest = VNRecognizeTextRequest(completionHandler: nil)
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
-        textRecognitionRequest.recognitionLanguages = ["en-US", "zh-CN"] // 根据需要设置语言
+        textRecognitionRequest.recognitionLanguages = ["en-US", "zh-CN"] // Set languages as needed
         
         super.init()
     }
     
-    // 处理捕获到的相机帧
+    // Handle the captured camera frame
     func handleCapturedFrame(_ sampleBuffer: CMSampleBuffer, completion: @escaping (String?) -> Void) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             completion(nil)
@@ -49,12 +49,12 @@ class Scanner: NSObject {
             completion(recognizedText.isEmpty ? nil : recognizedText)
         }
         
-        textRecognitionRequest.recognitionLanguages = ["zh-CN", "en-US"] // 添加中文和英文的支持
+        textRecognitionRequest.recognitionLanguages = ["zh-CN", "en-US"] // Add support for Chinese and English
 
         do {
             try requestHandler.perform([textRecognitionRequest])
         } catch {
-            print("文本识别错误：\(error)")
+            print("Text recognition error: \(error)")
             completion(nil)
         }
     }
