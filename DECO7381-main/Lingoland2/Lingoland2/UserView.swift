@@ -1,0 +1,231 @@
+import SwiftUI
+
+struct UserView: View {
+    @Environment(\.presentationMode) var presentationMode // 获取环境变量以控制视图的展示模式
+    @State private var showWordView = false // 控制 WordView 的显示状态
+    @State private var showReviewView = false // 控制 ReviewImageView 的显示状态
+
+    
+    var body: some View {
+        VStack {
+            // 自定义顶部容器
+            HStack {
+                Button(action: {
+                    // 返回到上一个视图
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.white)
+                }
+                .padding(.leading) // 让返回按钮靠左
+                
+                Spacer()
+                
+                Text("User")
+                    .font(.title3)
+                    .foregroundColor(.white)
+                    .bold() // 设置标题居中显示
+                
+                Spacer()
+            }
+            .padding() // 给顶部容器添加一些 padding
+            .background(Color.black.opacity(0.8)) // 设置背景颜色为黑色并加一点透明度
+            
+            Spacer() // 占位符，将顶部容器与内容分隔开
+            
+            // 这里是其他内容，如你原先的Profile内容等
+            VStack {
+                // Profile 1: Child
+                HStack {
+                    Image("Ash") // Replace with the actual image name
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                    
+                    VStack(alignment: .leading) {
+                        Text("Level:")
+                            .font(.headline)
+                        Text("Child")
+                            .font(.subheadline)
+                    }
+                    
+                    Spacer()
+                    VStack {
+                        Button(action: {
+                            showWordView = true
+                        }) {
+                            Text("Set Daily Task")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        .background(
+                            NavigationLink(destination: WordView(viewModel: WordViewModel()), isActive: $showWordView) {
+                                EmptyView()
+                            }
+                        )
+                        
+                        Button(action: {
+                            // Action for Clear Game Data
+                        }) {
+                            Text("Clear Game Data")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                    }
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(radius: 5)
+                .padding(.horizontal)
+
+                // Profile 2: Parent
+                HStack {
+                    Image("Parent") // Replace with the actual image name
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                    
+                    VStack(alignment: .leading) {
+                        Text("Level:")
+                            .font(.headline)
+                        Text("Parent")
+                            .font(.subheadline)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Button(action: {
+                            showWordView = true
+                        }) {
+                            Text("Set Daily Task")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        .background(
+                            NavigationLink(destination: WordView(viewModel: WordViewModel()), isActive: $showWordView) {
+                                EmptyView()
+                            }
+                        )
+                        
+                        Button(action: {
+                            showReviewView = true // 设置为 true 以显示 ReviewImageView
+                            // Action for Learning Situation
+                        }) {
+                            Text("Review situation")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        .background(
+                            NavigationLink(destination: ReviewImageView(), isActive: $showReviewView) {
+                                EmptyView()
+                            }
+                        )
+
+                        Button(action: {
+                            // Action for Change Password
+                        }) {
+                            Text("Change PWS")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        
+                        Button(action: {
+                            // Action for Delete Account
+                        }) {
+                            Text("DEL Account")
+                                .padding()
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                    }
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(radius: 5)
+                .padding(.horizontal)
+
+                Spacer()
+                
+                // Floating Action Button
+                HStack {
+                    Button(action: {
+                        // Action for the floating button
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.orange)
+                            .padding()
+                    }
+                }
+                .padding(.trailing)
+                Spacer()
+                
+                // 底部导航栏
+                HStack {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+                        Text("User")
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+
+                    VStack {
+                        NavigationLink(destination: ScannerView()) {
+                            Image("Scan")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(.white)
+                        }
+                        Text("Scan")
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                    VStack {
+                        NavigationLink(destination: SettingView()) {
+                            Image(systemName: "gear")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
+                        }
+                        Text("Setting")
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                }
+                .padding()
+                .background(Color.black.opacity(0.8))
+            }
+            .navigationBarHidden(true) // 隐藏原始导航栏
+        }
+    }
+}
+
+struct UserView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserView()
+    }
+}
