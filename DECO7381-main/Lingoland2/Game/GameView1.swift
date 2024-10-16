@@ -135,7 +135,7 @@ struct GameView1: View {
                     Spacer()
                     // 修改过---------------------------
                     VStack {
-                        NavigationLink(destination: ScannerView()) {
+                        NavigationLink(destination: ScannerContentView()) {
                             Image("Scan")
                                 .resizable()
                                 .frame(width: 80, height: 80)
