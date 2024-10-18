@@ -1,0 +1,78 @@
+Final version database ,Please run inside (),outside () are comments
+
+Linux command
+
+Connect our database
+(gcloud sql connect deco7381database --user=deco7381northwind)
+
+Enter the password of user
+(123456)
+
+
+SQL statement
+
+Create our database
+
+(CREATE DATABASE deco7381northwind;)
+
+Enter in our database deco7381northwind
+
+(USE deco7381northwind;)
+
+Create table user
+(
+create table user(
+user_id int primary key,
+is_parent bool,
+username varchar(50),
+password varchar(20),
+phone_number varchar(20),
+address varchar(100),
+emergency_contact varchar(20)
+);
+)
+
+Create table review
+(
+create table review(
+text varchar(200) primary key,
+user_id int default 1,
+translation varchar(200),
+foreign key (user_id) references user(user_id)
+);
+)
+
+Create table monster
+(
+create table monster(
+monster_id int primary key,
+user_id int,
+monster_name varchar(50),
+level int,
+hp int,
+foreign key (user_id) references user(user_id)
+);
+)
+
+Create table dailytask
+(
+create table dailytask(
+text varchar(200) primary key,
+user_id int default 1,
+translation varchar(200),
+foreign key (user_id) references user(user_id)
+);
+)
+
+Insert some value to test
+(
+INSERT INTO user(user_id,username) VALUES('1','xiaozhang');
+
+INSERT INTO review(text,translation) VALUES('computer','电脑');
+
+INSERT INTO review(text,translation) VALUES('book','书');
+
+INSERT INTO review(text,translation) VALUES('box','箱子');
+
+INSERT INTO review(text,translation) VALUES('bottle','瓶子');
+)
