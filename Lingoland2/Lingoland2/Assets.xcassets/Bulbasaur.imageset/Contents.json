@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Bulbasaur.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "Charmander.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

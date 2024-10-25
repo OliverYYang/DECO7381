@@ -1,10 +1,3 @@
-//
-//  Lingoland2UITestsLaunchTests.swift
-//  Lingoland2UITests
-//
-//  Created by 杨小洲 on 2024/8/28.
-//
-
 import XCTest
 
 final class Lingoland2UITestsLaunchTests: XCTestCase {

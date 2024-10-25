@@ -24,7 +24,8 @@ struct DetectedLanguage: Codable {
     let language: String
     let confidence: Double
 }
-// 同义词响应模型
+
+// Synonyms response model
 struct Definition: Codable {
     let definition: String
     let example: String?
@@ -45,16 +46,12 @@ class TranslationService {
     private let baseURL = "https://translation.googleapis.com/language/translate/v2"
     private let detectURL = "https://translation.googleapis.com/language/translate/v2/detect"
     
-    
-    // 使用 Free Dictionary API 查询同义词和例句
+    // Use Free Dictionary API to query synonyms and examples
     private let freeDictionaryBaseURL = "https://api.dictionaryapi.dev/api/v2/entries"
 
     
-    // 翻译方法
+    // Translation method
     func translate(text: String, targetLanguage: String, completion: @escaping (String?) -> Void) {
-        print("准备进行翻译：原始文本为 \(text)，目标语言为 \(targetLanguage)")
-        
-        
         guard let url = URL(string: "\(baseURL)?key=\(apiKey)") else {
             print("Invalid URL.")
             completion(nil)
@@ -103,7 +100,7 @@ class TranslationService {
         }.resume()
     }
     
-    // 语言检测方法
+    // Language detection method
     func detectLanguage(text: String, completion: @escaping (String?) -> Void) {
         guard let url = URL(string: "\(detectURL)?key=\(apiKey)") else {
             print("Invalid URL.")
@@ -151,7 +148,7 @@ class TranslationService {
         }.resume()
     }
     
-    // 使用 Free Dictionary API 获取同义词和例句
+    // Use Free Dictionary API to fetch synonyms and examples
     func fetchSynonymsAndExamples(for word: String, language: String = "en", completion: @escaping ([String]?, [String]?) -> Void) {
         let urlString = "\(freeDictionaryBaseURL)/\(language)/\(word)"
         guard let url = URL(string: urlString) else {
@@ -176,7 +173,7 @@ class TranslationService {
             do {
                 let result = try JSONDecoder().decode([FreeDictionaryResponse].self, from: data)
                 
-                // 提取同义词和例句
+                // Extract synonyms and examples
                 var synonyms: [String] = []
                 var examples: [String] = []
                 
@@ -188,7 +185,7 @@ class TranslationService {
                     }
                 }
                 
-                // 将同义词从 meanings 部分解析出来，如果 API 提供了同义词
+                // Extract synonyms from meanings section if the API provides them
                 completion(synonyms, examples)
                 
             } catch {
@@ -198,3 +195,4 @@ class TranslationService {
         }.resume()
     }
 }
+

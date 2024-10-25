@@ -14,18 +14,18 @@ class CameraViewController: UIViewController {
 
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
-    var scanner = Scanner() // 初始化 Scanner 类
-    var ocrResult: ((String?) -> Void)? // 用于传递 OCR 结果的闭包
-    var isProcessing = false // 标记是否正在进行 OCR 识别
+    var scanner = Scanner() // Initialize Scanner class
+    var ocrResult: ((String?) -> Void)? // Closure to pass OCR result
+    var isProcessing = false // Flag to indicate if OCR recognition is in progress
+    var isFullScreenMode: Bool = true // Added to control full-text or within-frame scanning
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 创建捕获会话
+        // Create capture session
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
 
-        // 设置输入设备为相机
         guard let videoCaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else { return }
         let videoInput: AVCaptureDeviceInput
         do {
@@ -40,20 +40,20 @@ class CameraViewController: UIViewController {
             return
         }
 
-        // 设置输出
+        // Set output
         let videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
         if captureSession.canAddOutput(videoOutput) {
             captureSession.addOutput(videoOutput)
         }
 
-        // 设置视频预览层
+        // Set video preview layer
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoPreviewLayer.frame = view.layer.bounds
         videoPreviewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(videoPreviewLayer)
 
-        // 开始捕获
+        // Start capturing
         captureSession.startRunning()
     }
 
@@ -63,25 +63,42 @@ class CameraViewController: UIViewController {
     }
 }
 
-// 扩展 AVCaptureVideoDataOutputSampleBufferDelegate 以处理帧
+// Extend AVCaptureVideoDataOutputSampleBufferDelegate to process frames
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard !isProcessing else { return } // Skip if processing
         
-        // 如果当前正在处理 OCR，则跳过这一帧
-        guard !isProcessing else { return }
+        isProcessing = true
         
-        isProcessing = true // 标记为正在处理
-        
-        // 使用 Scanner 类处理帧并进行 OCR 识别
+        if isFullScreenMode {
+            // Execute full-text scanning OCR logic
+            processFullScreenOCR(sampleBuffer)
+        } else {
+            // Execute word mode OCR logic
+            processWordModeOCR(sampleBuffer)
+        }
+    }
+
+    // Full-text scan OCR
+    func processFullScreenOCR(_ sampleBuffer: CMSampleBuffer) {
+        // Call the scanner class to handle full-text OCR
         scanner.handleCapturedFrame(sampleBuffer) { [weak self] recognizedText in
             DispatchQueue.main.async {
-                // 将 OCR 结果传递给 ScannerView
                 self?.ocrResult?(recognizedText ?? "Text not recognized")
-                
-                // 打印 OCR 识别结果
-//                print("OCR identifies result: \(recognizedText ?? "Text not recognized")")
-                
-                // 延迟 3 秒后再允许处理下一帧
+                DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {
+                    self?.isProcessing = false
+                }
+            }
+        }
+    }
+
+    // Word mode scan OCR
+    func processWordModeOCR(_ sampleBuffer: CMSampleBuffer) {
+        // Handle logic to scan within a frame only
+        // Example: Only capture the center area of the video frame
+        scanner.handleCapturedFrame(sampleBuffer) { [weak self] recognizedText in
+            DispatchQueue.main.async {
+                self?.ocrResult?(recognizedText ?? "Text not recognized")
                 DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {
                     self?.isProcessing = false
                 }

@@ -1,10 +1,3 @@
-//
-//  Lingoland2Tests.swift
-//  Lingoland2Tests
-//
-//  Created by 杨小洲 on 2024/8/28.
-//
-
 import XCTest
 @testable import Lingoland2
 

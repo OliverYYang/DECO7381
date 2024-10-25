@@ -1,69 +1,139 @@
-
 import SwiftUI
+// Top search bar component
+struct SearchBarView: View {
+    @Binding var searchText: String
+    
+    var body: some View {
+        HStack {
+            TextField("Search...", text: $searchText)
+                .padding(.leading, 10)
+            NavigationLink(destination: VocabularyView(wordToTranslate: searchText)) {
+                Image(systemName: "magnifyingglass")
+                    .padding(.trailing, 10)
+            }
+        }
+        .frame(height: 40)
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(25)
+        .padding(.horizontal)
+    }
+}
 
+// User info card component
+struct UserInfoCardView: View {
+    var body: some View {
+        HStack {
+            Image("Ash")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .clipShape(Circle())
+            VStack(alignment: .leading) {
+                Text("ID: Ash")
+                    .font(.headline)
+                Text("Today's Mission:")
+                Text("8/10")
+                    .font(.subheadline)
+            }
+            .foregroundColor(.white)
+            Spacer()
+            Text("Cost: 90")
+                .foregroundColor(.orange)
+                .font(.subheadline)
+                .padding(.trailing)
+        }
+    }
+}
+
+// Bottom navigation bar component
+struct BottomNavBarView: View {
+    var body: some View {
+        HStack {
+            Spacer()
+            VStack {
+                NavigationLink(destination: UserView()) {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.white)
+                }
+                Text("User")
+                    .font(.footnote)
+                    .foregroundColor(.white)
+            }
+            Spacer()
+
+            VStack {
+                NavigationLink(destination: ScannerContentView()) {
+                    Image("Scan")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.white)
+                }
+                Text("Scan")
+                    .font(.footnote)
+                    .foregroundColor(.white)
+            }
+            Spacer()
+
+            // Modified to NavigationLink to navigate to SettingView
+            VStack {
+                NavigationLink(destination: SettingView()) { // Navigate to SettingView
+                    Image(systemName: "gear")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.white)
+                }
+                Text("Setting")
+                    .font(.footnote)
+                    .foregroundColor(.white)
+            }
+            Spacer()
+        }
+        .padding()
+        .background(Color.black.opacity(0.8))
+    }
+}
+
+// Main content view
 struct ContentView: View {
+    @State private var searchText: String = ""
+    @State private var defeatedMonsters: [Bool] = [false, false, false] // Define monster defeat states
+    
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
-                HStack {
-                    TextField("Search...", text: .constant(""))
-                        .padding(.leading, 10)
-                    NavigationLink(destination:VocabularyView()){
-                        Image(systemName: "magnifyingglass")
-                            .padding(.trailing, 10)
-                    }
-                }
-                .frame(height: 40)
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding()
-
-                // Profile and Mission Section
+                // Top search bar
+                SearchBarView(searchText: $searchText)
+                
+                // User info and tasks
                 VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Image("Ash") // Replace with actual image name
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .clipShape(Circle())
-                        VStack(alignment: .leading) {
-                            Text("ID: Ash")
-                                .font(.headline)
-                            Text("Today's Mission: 8 / 10 words")
-                                .font(.subheadline)
-                        }
-                        Spacer()
-                        Text("Cost: 90")
-                            .font(.subheadline)
-                            .padding(.trailing)
-                    }
+                    UserInfoCardView()
+                    Spacer()
                     
-                    // Adding the Charmander Image above the button
-                    VStack{
+                    // Battle and monster section
+                    ZStack {
+                        NavigationLink(destination: GameView()) {
+                            Text("Master!                                      Let's Catch                               Squirtle!")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: 400, minHeight: 180)
+                                .background(Color.orange)
+                                .cornerRadius(8)
+                        }
+                        
+                        // Charmander image
                         Image("Charmander") // Replace with the actual image name
                             .resizable()
-                            .frame(width: 100, height: 100 )
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)// Adjust size as needed
-                            .padding(.bottom, 10) // Overlap slightly with the button
+                            .scaledToFit()
+                            .frame(width: 120, height: 120)
+                            .offset(y: -100)
                     }
                     
-
-                    // Catch Mission Button
-                    Button(action: {
-                        // Action for Catch Button
-                    }) {
-                        Text("Master! Let's Catch Squirtle!")
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.orange)
-                            .cornerRadius(8)
-                    }
-
-                    // Select Target Button
-                    Button(action: {
-                        // Action for Select Target
-                    }) {
+                    Spacer()
+                    
+                    // Select target button
+                    NavigationLink(destination: GameView3()) {
                         Text("Select your Target")
                             .foregroundColor(.black)
                             .padding()
@@ -77,75 +147,67 @@ struct ContentView: View {
                     }
                 }
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .frame(maxWidth: .infinity, minHeight: 400)
+                .background(Color.black.opacity(0.8))
                 .cornerRadius(10)
                 .padding()
-
-                // Manage Vocabulary and Monster Section
+                
+                Spacer()
+                
+                // Vocabulary and monster management section
                 HStack {
-                    VStack {
-                        Image("Book")
-                            .resizable()
-                            .frame(width: 85, height: 65)
-                        Spacer()
-                        Text("Manage my Vocabulary")
-                            .font(.footnote)
+                    NavigationLink(destination: WordView()) {
+                        VStack {
+                            Image("Book")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 85, height: 85)
+                            Text("Manage my Vocabulary")
+                                .foregroundColor(.white)
+                                .font(.footnote)
+                        }
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 150, height: 120)
+                    .background(Color.black.opacity(0.7))
+                    .cornerRadius(10)
+                    .padding()
 
-                    VStack {
-                        Image("Pokeball")
-                            .resizable()
-                            .frame(width: 100, height: 73)
-                        Text("Manage my Monster")
-                            .font(.footnote)
+                    NavigationLink(destination: MonsterDexView(defeatedMonsters: $defeatedMonsters)) {
+                        VStack {
+                            Image("Pokeball")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 85)
+                            Text("Manage my Monster")
+                                .foregroundColor(.white)
+                                .font(.footnote)
+                        }
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 150, height: 120)
+                    .background(Color.black.opacity(0.7))
+                    .cornerRadius(10)
+                    .padding()
                 }
-                .padding()
 
                 Spacer()
-
-                // Bottom Navigation
-                HStack {
-                    Spacer()
-                    VStack {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                        Text("User")
-                            .font(.footnote)
-                    }
-                    Spacer()
-                    // 修改过---------------------------
-                    VStack {
-                        NavigationLink(destination: ScannerContentView()) {  // 修改为 ScannerContentView
-                            Image("Scan")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                        }
-                    
-
-                        Text("Scan")
-                            .font(.footnote)
-                    }
-                    Spacer()
-                    VStack {
-                        Image(systemName: "gear")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                        Text("Setting")
-                            .font(.footnote)
-                    }
-                    Spacer()
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
+                
+                // Bottom navigation bar
+                BottomNavBarView()
             }
-            .navigationTitle("HomePage")
             .navigationBarTitleDisplayMode(.inline)
-            
+            .onAppear {
+                if let savedMonsters = UserDefaults.standard.array(forKey: "defeatedMonsters") as? [Bool] {
+                    defeatedMonsters = savedMonsters
+                }
+            }
         }
+    }
+    
+    // Reset function
+    func resetDefeatedMonsters() {
+        UserDefaults.standard.removeObject(forKey: "defeatedMonsters")
+        defeatedMonsters = [false, false, false]
+        UserDefaults.standard.set(defeatedMonsters, forKey: "defeatedMonsters")
     }
 }
 
@@ -154,3 +216,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
